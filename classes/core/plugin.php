@@ -23,6 +23,8 @@ class Plugin extends Singleton {
         self::helper();
         self::textdomain();
         self::classes();
+
+        register_activation_hook( WP_MINDS_SKILL_ASSESSMENT_TASK_PLUGIN_FILE, 'flush_rewrite_rules' );
     }
 
     /**
@@ -49,6 +51,10 @@ class Plugin extends Singleton {
      * @return void
      */
     private static function classes() {
-        \Wp_Minds_Skill_Assessment_Task\Admin\Settings::instance();
+        if ( is_admin() ) {
+            \Wp_Minds_Skill_Assessment_Task\Admin\Settings::instance();
+        }
+
+        \Wp_Minds_Skill_Assessment_Task\PostTypes\Reviews::instance();
     }
 }

@@ -38,7 +38,7 @@ class Settings extends Singleton {
      *
      * @return array
      */
-    private static function get_settings() {
+    public static function get_settings() {
         return array(
             array(
                 'id'       => 'reviews',
