@@ -12,16 +12,23 @@
  * @package         Wp_Minds_Skill_Assessment_Task
  */
 
-// Loaded directly.
+// Prevent direct access
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Plugin file.
 define( 'WP_MINDS_SKILL_ASSESSMENT_TASK_PLUGIN_FILE', trailingslashit( __FILE__ ) );
+// Plugin directory path.
 define( 'WP_MINDS_SKILL_ASSESSMENT_TASK_PLUGIN_DIR', trailingslashit( __DIR__ ) );
+// Plugin directory URL.
 define( 'WP_MINDS_SKILL_ASSESSMENT_TASK_PLUGIN_URL', trailingslashit( plugin_dir_url( WP_MINDS_SKILL_ASSESSMENT_TASK_PLUGIN_FILE ) ) );
-define( 'WP_MINDS_SKILL_ASSESSMENT_TASK_PLUGIN_VERSION', '0.1.0' );
 
+/**
+ * Autoloader for plugin classes.
+ * 
+ * @return void
+ */
 function wp_minds_skill_assessment_task_plugin_autoloader( $class ) {
     $namespace = 'Wp_Minds_Skill_Assessment_Task\\';
     if ( ! str_contains( $class, $namespace ) ) {
@@ -39,6 +46,11 @@ function wp_minds_skill_assessment_task_plugin_autoloader( $class ) {
 }
 spl_autoload_register( 'wp_minds_skill_assessment_task_plugin_autoloader' );
 
+/**
+ * Initialize plugin.
+ * 
+ * @return void
+ */
 function wp_minds_skill_assessment_task_plugin_init(){
     \Wp_Minds_Skill_Assessment_Task\Core\Plugin::instance();
 }
