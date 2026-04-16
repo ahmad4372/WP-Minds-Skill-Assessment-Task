@@ -1,0 +1,116 @@
+/* Reset */
+* {
+	box-sizing: border-box;
+}
+
+/* Container */
+.wpmsat-reviews-container {
+	position: relative;
+}
+
+/* Grid */
+.wpmsat-reviews-grid .wpmsat-reviews {
+	display: grid;
+	grid-template-columns: repeat(var(--wpmsat-reviews-grid-columns, 3), 1fr);
+	gap: 20px;
+}
+
+/* Review Card */
+.wpmsat-review {
+	padding: 20px;
+	border: 1px solid #ddd;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.wpmsat-review-title {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.wpmsat-review-content {
+    margin: 0 0 0 0;
+    font-size: 16px;
+}
+
+.wpmsat-review-author {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin: 0 0 12px 0;
+}
+
+.wpmsat-review-author h4,
+.wpmsat-review-author p {
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.wpmsat-review-author h4 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.wpmsat-review-author p {
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.wpmsat-review-author img {
+    width: 48px;
+    height: 48px;
+    border-radius: 96px;
+    border: 1px solid #ddd;
+}
+
+/* Slider */
+.wpmsat-reviews-slider {
+	overflow: hidden;
+}
+
+.wpmsat-reviews-slider .wpmsat-reviews {
+	display: flex;
+    gap: 20px;
+	transition: transform 0.4s ease;
+}
+
+.wpmsat-reviews-slider .wpmsat-review {
+    /* Total width - gap between slides / number of slides */
+	flex: 0 0 calc((100% - (20px * (var(--wpmsat-reviews-grid-columns, 3) - 1))) / var(--wpmsat-reviews-grid-columns, 3));
+}
+
+/* Slider Navigation Buttons */
+.wpmsat-reviews-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0 0 0;
+    gap: 20px;
+}
+
+.wpmsat-reviews-prev,
+.wpmsat-reviews-next {
+	padding: 10px 15px;
+	background: #000;
+	color: #fff;
+	border: none;
+	cursor: pointer;
+    min-width: 110px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+	.wpmsat-reviews-grid .wpmsat-reviews {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: 480px) {
+	.wpmsat-reviews-grid .wpmsat-reviews {
+		grid-template-columns: 1fr;
+	}
+}
