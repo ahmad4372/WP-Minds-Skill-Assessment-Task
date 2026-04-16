@@ -43,12 +43,18 @@ class Reviews extends Singleton {
             'singular_name'      => $post_type_title,
             'menu_name'          => $post_type_title,
             'name_admin_bar'     => $post_type_title,
-            'add_new_item'       => sprintf( __( 'Add New %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
-            'edit_item'          => sprintf( __( 'Edit %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
-            'new_item'           => sprintf( __( 'New %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
-            'view_item'          => sprintf( __( 'View %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
-            'search_items'       => sprintf( __( 'Search %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
-            'not_found'          => sprintf( __( 'No %s found', 'wp-minds-skill-assessment-task' ), $post_type_title ),
+    		// translators: %s: Reviews post type title
+            'add_new_item'       => sprintf( esc_html__( 'Add New %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
+    		// translators: %s: Reviews post type title
+            'edit_item'          => sprintf( esc_html__( 'Edit %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
+    		// translators: %s: Reviews post type title
+            'new_item'           => sprintf( esc_html__( 'New %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
+    		// translators: %s: Reviews post type title
+            'view_item'          => sprintf( esc_html__( 'View %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
+    		// translators: %s: Reviews post type title
+            'search_items'       => sprintf( esc_html__( 'Search %s', 'wp-minds-skill-assessment-task' ), $post_type_title ),
+    		// translators: %s: Reviews post type title
+            'not_found'          => sprintf( esc_html__( 'No %s found', 'wp-minds-skill-assessment-task' ), $post_type_title ),
         );
         $args = array(
             'labels'              => $labels,
@@ -78,7 +84,8 @@ class Reviews extends Singleton {
      * @return void
      */
     public function add_meta_boxes() {
-        add_meta_box( 'reviews_meta_box', sprintf( __( '%s Content', 'wp-minds-skill-assessment-task' ), wpmsat_get_setting( 'reviews_post_type_title' ) ), array( $this, 'render_meta_box' ), 'reviews', 'normal', 'high' );
+        // translators: %s: Reviews post type title
+        add_meta_box( 'reviews_meta_box', sprintf( esc_html__( '%s Content', 'wp-minds-skill-assessment-task' ), wpmsat_get_setting( 'reviews_post_type_title' ) ), array( $this, 'render_meta_box' ), 'reviews', 'normal', 'high' );
     }
 
     /**
@@ -91,15 +98,15 @@ class Reviews extends Singleton {
         wp_nonce_field( 'reviews_meta_box_nonce', 'reviews_meta_box_nonce' );
         ?>
         <p>
-            <label for="_content"><?php _e( 'Content', 'wp-minds-skill-assessment-task' ); ?></label>
+            <label for="_content"><?php esc_html_e( 'Content', 'wp-minds-skill-assessment-task' ); ?></label>
             <textarea class="widefat" id="_content" name="_content" rows="4"><?php echo esc_attr( get_post_meta( $post->ID, '_content', true ) ); ?></textarea>
         </p>
         <p>
-            <label for="_author_name"><?php _e( 'Author Name', 'wp-minds-skill-assessment-task' ); ?></label>
+            <label for="_author_name"><?php esc_html_e( 'Author Name', 'wp-minds-skill-assessment-task' ); ?></label>
             <input type="text" class="widefat" id="_author_name" name="_author_name" value="<?php echo esc_attr( get_post_meta( $post->ID, '_author_name', true ) ); ?>" />
         </p>
         <p>
-            <label for="_author_tagline"><?php _e( 'Author Tagline', 'wp-minds-skill-assessment-task' ); ?></label>
+            <label for="_author_tagline"><?php esc_html_e( 'Author Tagline', 'wp-minds-skill-assessment-task' ); ?></label>
             <input type="text" class="widefat" id="_author_tagline" name="_author_tagline" value="<?php echo esc_attr( get_post_meta( $post->ID, '_author_tagline', true ) ); ?>" />
         </p>
         <?php
@@ -112,7 +119,7 @@ class Reviews extends Singleton {
      * @return void
      */
     public function save_custom_fields( $post_id ) {
-        if ( empty( $_POST['reviews_meta_box_nonce'] ) || ! wp_verify_nonce( $_POST['reviews_meta_box_nonce'], 'reviews_meta_box_nonce' ) ) {
+        if ( empty( $_POST['reviews_meta_box_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['reviews_meta_box_nonce'] ) ), 'reviews_meta_box_nonce' ) ) {
             return;
         }
         if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -123,13 +130,13 @@ class Reviews extends Singleton {
         }
         
         if ( isset( $_POST['_content'] ) ) {
-            update_post_meta( $post_id, '_content', sanitize_textarea_field( $_POST['_content'] ) );
+            update_post_meta( $post_id, '_content', sanitize_textarea_field( wp_unslash( $_POST['_content'] ) ) );
         }
         if ( isset( $_POST['_author_name'] ) ) {
-            update_post_meta( $post_id, '_author_name', sanitize_text_field( $_POST['_author_name'] ) );
+            update_post_meta( $post_id, '_author_name', sanitize_text_field( wp_unslash( $_POST['_author_name'] ) ) );
         }
         if ( isset( $_POST['_author_tagline'] ) ) {
-            update_post_meta( $post_id, '_author_tagline', sanitize_text_field( $_POST['_author_tagline'] ) );
+            update_post_meta( $post_id, '_author_tagline', sanitize_text_field( wp_unslash( $_POST['_author_tagline'] ) ) );
         }
     }
 

@@ -12,16 +12,18 @@ if ( empty( $args ) ) {
     return;
 }
 
-$option_name = $args['name'];
-$option_value = get_option( $option_name, $args['default'] );
-$option_value = empty( $option_value ) ? $args['default'] : $option_value;
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+$field_option_name = $args['name'];
+$field_option_value = get_option( $field_option_name, $args['default'] );
+$field_option_value = empty( $field_option_value ) ? $args['default'] : $field_option_value;
 ?>
-<select class="regular-text" name="<?php echo esc_attr( $option_name ); ?>">
-    <?php foreach ( $args['options'] as $option => $option_label ) : ?>
-        <option value="<?php echo esc_attr( $option ); ?>" <?php selected( $option_value, $option ); ?>><?php echo esc_html( $option_label ); ?></option>
+<select class="regular-text" name="<?php echo esc_attr( $field_option_name ); ?>">
+    <?php foreach ( $args['options'] as $option => $field_option_label ) : ?>
+        <option value="<?php echo esc_attr( $option ); ?>" <?php selected( $field_option_value, $option ); ?>><?php echo esc_html( $field_option_label ); ?></option>
     <?php endforeach; ?>
 </select>
 <?php 
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 if ( ! empty( $args['desc'] ) ) {
     ?>
     <p class="description"><?php echo esc_html( $args['desc'] ); ?></p>

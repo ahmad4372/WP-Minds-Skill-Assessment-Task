@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name:     WP Minds Skill Assessment Task
+ * Plugin Name:     WPMinds Skill Assessment Task
  * Plugin URI:      https://github.com/ahmad4372/WP-Minds-Skill-Assessment-Task
  * Description:     Custom WordPress plugin to manage reviews with CPT, meta fields, and a frontend slider with shortcode support.
  * Author:          Muhammad Ahmad
@@ -57,6 +57,6 @@ spl_autoload_register('wp_minds_skill_assessment_task_plugin_autoloader');
  */
 function wp_minds_skill_assessment_task_plugin_init()
 {
-    \Wp_Minds_Skill_Assessment_Task\Core\Plugin::instance();
+    Wp_Minds_Skill_Assessment_Task\Core\Plugin::instance();
 }
 add_action('plugins_loaded', 'wp_minds_skill_assessment_task_plugin_init');

@@ -12,11 +12,13 @@ if ( empty( $args ) ) {
     return;
 }
 
-$option_name = $args['name'];
-$option_value = get_option( $option_name, $args['default'] );
-$option_value = empty( $option_value ) ? $args['default'] : $option_value;
+// phpcs:disable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+$field_option_name  = $args['name'];
+$field_option_value = get_option( $field_option_name, $args['default'] );
+$field_option_value = empty( $field_option_value ) ? $args['default'] : $field_option_value;
+// phpcs:enable WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 ?>
-<input type="text" class="regular-text" name="<?php echo esc_attr( $option_name ); ?>" value="<?php echo esc_attr( $option_value ); ?>">
+<input type="text" class="regular-text" name="<?php echo esc_attr( $field_option_name ); ?>" value="<?php echo esc_attr( $field_option_value ); ?>">
 <?php 
 if ( ! empty( $args['desc'] ) ) {
     ?>
